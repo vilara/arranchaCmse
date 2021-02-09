@@ -14,8 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/painel', function () {
+    return view('admin.home');
+});
+
+Route::get('/site', function () {
+    return view('site.home');
+});
+
+Route::get('/form', function () {
+    return view('upload.form');
+});
+Route::post('/upload', 'UploadController@upload')->name('upload');
 
 Auth::routes();
 
