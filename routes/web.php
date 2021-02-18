@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/testejwt', 'Api\AuthController@index')->name('jwt');
+Route::get('/users', 'Api\UserController@index')->name('users');
