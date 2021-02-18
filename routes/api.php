@@ -18,4 +18,10 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 }); */
 
-Route::get('users', 'Api\UserController@index');
+//Route::get('users', 'Api\UserController@index');
+Route::group(['middleware' => ['apijwt']], function(){
+    Route::post('logout', 'Api\AuthController@logout');
+    Route::get('users', 'Api\UserController@index');
+
+});
+Route::post('login', 'Api\AuthController@login')->name('api-login');
