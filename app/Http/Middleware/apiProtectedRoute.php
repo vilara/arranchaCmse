@@ -32,4 +32,9 @@ class apiProtectedRoute extends BaseMiddleware
         }
         return $next($request);
     }
+
+
+
+
+    
 }
