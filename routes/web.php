@@ -13,31 +13,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/*
+Layout CUBA
+*/
+
 Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/painel', function () {
-    return view('admin.home');
-});
+Route::get('/login', 'Cuba\Auth\AuthCubaController@index')->name('cuba-login-form');
+Route::post('/login', 'Cuba\Auth\LoginCubaController@login')->name('cuba-login');
+Route::get('/mostrar', 'Cuba\Auth\LoginCubaController@mostrar')->name('cuba-mostrar');
 
-Route::get('/site', function () {
-    return view('site.home');
-});
 
-Route::get('/form', function () {
-    return view('upload.form');
-});
-Route::post('/upload', 'UploadController@upload')->name('upload');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/testejwt', 'Api\AuthController@index')->name('jwt');
-Route::get('/users', 'Api\UserController@index')->name('users');
 
-Route::get('/teste', function () {
-    return view('teste.index');
-});
+
+
+// Route::get('/painel', function () {
+//     return view('admin.home');
+// });
+
+// Route::get('/site', function () {
+//     return view('site.home');
+// });
+
+// Route::get('/form', function () {
+//     return view('upload.form');
+// });
+// Route::post('/upload', 'UploadController@upload')->name('upload');
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/testejwt', 'Api\AuthController@index')->name('jwt');
+// Route::get('/users', 'Api\UserController@index')->name('users');
+
+// Route::get('/teste', function () {
+//     return view('teste.index');
+// });
 
