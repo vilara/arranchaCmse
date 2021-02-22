@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -13,12 +13,12 @@
 <script src="{{ url(mix('/site/js/jquery.js')) }}"></script>
 <script src="{{ url(mix('/site/js/bootstrap.js')) }}"></script>
 </body>
-</html>
+</html> --}}
 
 
 
 
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -40,4 +40,4 @@
         </div>
     </div>
 </div>
-@endsection --}}
+@endsection 
