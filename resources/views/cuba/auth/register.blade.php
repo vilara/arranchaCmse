@@ -34,36 +34,44 @@
   </head>
   <body>
     <!-- login page start-->
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0"> 
       <div class="row m-0">
         <div class="col-12 p-0">    
           <div class="login-card">
             <div>
-              <div><a class="logo" href=""><img class="img-fluid for-light" src="../assets/images/logo/login.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
+              <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="../assets/images/logo/login.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
               <div class="login-main"> 
-                <form class="theme-form" action="{{ route('cuba-login') }}" method="POST">
-                  @method('post')
+                <form class="theme-form" method="POST" action="{{ route('registro') }}">
                   @csrf
-                  <h4>Login de acesso</h4>
-                  <p>Entre com seu e-mail e senha por favor!</p>
+
+                  <h4>Registre sua conta</h4>
                   <div class="form-group">
-                    <label class="col-form-label">Endereço de email</label>
+                    <label class="col-form-label pt-0">Nome completo</label>
+                    <input class="form-control" type="text" name="name" required="" placeholder="nome completo">
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label">Endereço de Email</label>
                     <input class="form-control" type="email" name="email" required="" placeholder="test@gmail.com">
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Senha</label>
-                    <input class="form-control" type="password" name="senha" required="" placeholder="*********">
-                    <div class="show-hide"><span class="show">                         </span></div>
+                    <input class="form-control" type="password" name="password" required="" placeholder="*********">
+                    <div class="show-hide"><span class="show"></span></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label">Confirme a Senha</label>
+                    <input class="form-control" type="password" id="password-confirm" name="password_confirmation" required="" placeholder="*********">
+                    <div class="show-hide"><span class="show"></span></div>
                   </div>
                   <div class="form-group mb-0">
                     <div class="checkbox p-0">
                       <input id="checkbox1" type="checkbox">
-                      <label class="text-muted" for="checkbox1">Lembrar senha</label>
-                    </div><a class="link" href="forget-password.html">Esqueceu a senha?</a>
-                    <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+                      <label class="text-muted" for="checkbox1">Concordo com a política de segurança?<a class="ms-2" href="#">Policy</a></label>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit">Criar conta</button>
                   </div>
-  
-                  <p class="mt-4 mb-0">Ainda não tem conta?<a class="ms-2" href="sign-up.html">Criar conta</a></p>
+                
+                  <p class="mt-4 mb-0">Já possui conta?<a class="ms-2" href="{{ route('login') }}">Entrar</a></p>
                 </form>
               </div>
             </div>

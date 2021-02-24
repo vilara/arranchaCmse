@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * 
+ * Autenticação personalizada
+ */
+Route::get('/', function () {return view('auth.login');})->name('login');
+
+Route::get('/cadastroUsuario', 'AuthController@formCadastro')->name('registro-form');
+Route::post('/storeUsuario', 'AuthController@store')->name('registro');
+Route::post('/loginPessoal', 'AuthController@authenticate');
+Route::post('/logoutt', 'AuthController@logout')->name('logoutt');
+
+//Route::get('/register', function () {return view('auth.register');})->name('register-form');
+
+
+//Route::post('/register', 'Auth\RegisterController')->name('register');
+
 
 /*
 Layout CUBA
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/login', 'Cuba\Auth\AuthCubaController@index')->name('cuba-login-form');
+
+
 Route::post('/login', 'Cuba\Auth\LoginCubaController@login')->name('cuba-login');
 Route::get('/mostrar', 'Cuba\Auth\LoginCubaController@mostrar')->name('cuba-mostrar');
 
@@ -46,7 +61,7 @@ Route::get('/mostrar', 'Cuba\Auth\LoginCubaController@mostrar')->name('cuba-most
 // });
 // Route::post('/upload', 'UploadController@upload')->name('upload');
 
-// Auth::routes();
+ // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
@@ -56,4 +71,3 @@ Route::get('/mostrar', 'Cuba\Auth\LoginCubaController@mostrar')->name('cuba-most
 // Route::get('/teste', function () {
 //     return view('teste.index');
 // });
-
