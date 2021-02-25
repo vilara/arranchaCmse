@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\User;
+use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Namshi\JOSE\Base64\Base64UrlSafeEncoder;
+use Symfony\Component\Mime\Encoder\Base64Encoder;
 
 class AuthController extends Controller
 {
@@ -26,6 +32,33 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
+
+    public function gerarToken(Request $request){
+
+        $this->validate($request, [
+          'email' => 'required|email',
+        'senha' =>  'required'
+        ]);
+
+        
+        $user = User::where('email', $request->email)->first();
+        
+        
+        
+        if(is_null($user) || !Hash::check($request->senha, $user->password)){
+            return response()->json('Não autorizado', 401);
+        }
+
+        
+        
+        $token = JWT::encode(['sub' => $user->id], 'qwertypassword');
+        
+        
+       return $this->respondWithToken($token);
+
+    }
+
+
 
 
     /**
