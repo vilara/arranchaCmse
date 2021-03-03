@@ -41,7 +41,7 @@
             <div>
               <div><a class="logo" href=""><img class="img-fluid for-light" src="../assets/images/logo/login.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
               <div class="login-main"> 
-                <form class="theme-form" action="" method="POST">
+                <form class="theme-form" action="{{ route('cuba-login') }}" method="POST">
                   @method('post')
                   @csrf
                   <h4>Login de acesso</h4>
@@ -52,7 +52,7 @@
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Senha</label>
-                    <input class="form-control" type="password" name="senha" required="" placeholder="*********">
+                    <input class="form-control" type="password" name="password" required="" placeholder="*********">
                     <div class="show-hide"><span class="show">                         </span></div>
                   </div>
                   <div class="form-group mb-0">

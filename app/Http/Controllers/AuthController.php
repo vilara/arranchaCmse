@@ -46,17 +46,23 @@ class AuthController extends Controller
      */
     public function authenticate(Request $request)
     {
+
+        $credentials = $request->only('email', 'password');
       if($request->remember == 1) {
           $remember = true; 
         }
           else{
               $remember =  false;
             }
-            if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'ativo' => 1],$remember)) {
+
+           if(Auth::attempt($credentials,'ativo',$remember)) {
+         //   if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'ativo' => 1],$remember)) {
             // Authentication passed...
-            return redirect()->intended('home');
+           // return "ok";
+           return redirect()->intended('home');
         }else{
-            return redirect()->intended('/login')->with('success', 'Usuário ou senha incorretos...');;
+          //  return "problema";
+            return redirect()->intended('/')->with('success', 'Usuário ou senha incorretos...');;
         }
     }
     

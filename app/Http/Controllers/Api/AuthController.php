@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Namshi\JOSE\Base64\Base64UrlSafeEncoder;
 use Symfony\Component\Mime\Encoder\Base64Encoder;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -39,22 +41,30 @@ class AuthController extends Controller
           'email' => 'required|email',
         'senha' =>  'required'
         ]);
+        
+         $user = User::where('email', $request->email)->first();
+        
+         
+         
+           if(is_null($user) || !Hash::check($request->senha, $user->password)){
+                   return response()->json('Não autorizado', 401);
+               }
+             
 
-        
-        $user = User::where('email', $request->email)->first();
-        
-        
-        
-        if(is_null($user) || !Hash::check($request->senha, $user->password)){
-            return response()->json('Não autorizado', 401);
-        }
+               
+               
+               $token = JWT::encode(['sub' => $user->id], 'qwertypassword');
 
+               $objectToken =  JWTAuth::setToken($token);
+               
+          //return JWTAuth::decode($objectToken->getToken())->get('exp');
+         // return JWTAuth::decode($objectToken->getToken())->get('sub');
+
+         //return Auth('api')::user();
+
+        // return JWTAuth::parseToken()->authenticate();
         
-        
-        $token = JWT::encode(['sub' => $user->id], 'qwertypassword');
-        
-        
-       return $this->respondWithToken($token);
+     return $this->respondWithToken($token) ;
 
     }
 

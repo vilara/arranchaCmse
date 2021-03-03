@@ -14,16 +14,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/**
+ * Admin LTE
+ */
+
+Route::namespace('admin')->group(function () {
+
+    Route::get('home', 'HomeController@index')->name('admin-home');
+    Route::get('login', function () {return view('adminlte.auth.login');})->name('login');
+
+});
+
 /**
  * 
  * Autenticação personalizada
  */
 Route::get('/', function () {return view('auth.login');})->name('login');
+Route::post('/login', 'AuthController@authenticate')->name('cuba-login');
+Route::get('/logout', 'AuthController@logout')->name('logout');
+Route::get('/home', 'HomeController@index')->name('cuba-home');
 
 Route::get('/cadastroUsuario', 'AuthController@formCadastro')->name('registro-form');
 Route::post('/storeUsuario', 'AuthController@store')->name('registro');
-Route::post('/loginPessoal', 'AuthController@authenticate');
-Route::post('/logoutt', 'AuthController@logout')->name('logoutt');
+//Route::post('/loginPessoal', 'AuthController@authenticate');
+//Route::post('/logoutt', 'AuthController@logout')->name('logoutt');
 
 //Route::get('/register', function () {return view('auth.register');})->name('register-form');
 
@@ -38,9 +53,15 @@ Layout CUBA
 
 
 
-Route::post('/login', 'Cuba\Auth\LoginCubaController@login')->name('cuba-login');
-Route::get('/mostrar', 'Cuba\Auth\LoginCubaController@mostrar')->name('cuba-mostrar');
+//Route::post('/login', 'Cuba\Auth\LoginCubaController@login')->name('cuba-login');
 
+
+
+
+
+//Route::group(['middleware' => ['apijwt']], function(){
+//Route::get('/mostrar', 'Cuba\Auth\LoginCubaController@mostrar')->name('cuba-mostrar');
+//});
 
 
 

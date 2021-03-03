@@ -18,7 +18,7 @@
 
 
 
-@extends('layouts.app')
+@extends('layouts.app-cuba')
 
 @section('content')
 <div class="container">

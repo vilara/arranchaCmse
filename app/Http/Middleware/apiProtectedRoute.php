@@ -20,7 +20,7 @@ class apiProtectedRoute extends BaseMiddleware
     {
 
         try {
-           $user = JWTAuth::parseToken()->authenticate();
+           JWTAuth::parseToken()->authenticate();
         } catch (\Exception $e) {
            if($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                return response()->json(['status' => 'Token is invalid']);
@@ -29,7 +29,7 @@ class apiProtectedRoute extends BaseMiddleware
            }else{
             return response()->json(['status' => 'Authorization token not found']);
            }
-        }
+        } 
         return $next($request);
     }
 

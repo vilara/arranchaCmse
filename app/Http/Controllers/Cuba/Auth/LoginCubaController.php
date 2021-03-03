@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Cuba\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Http;
+use Tymon\JWTAuth\Contracts\Providers\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\JWTAuth as JWTAuthJWTAuth;
 
 class LoginCubaController extends Controller
 {
@@ -16,13 +21,25 @@ class LoginCubaController extends Controller
             'email' => $request->get('email'),
             'senha' => $request->get('senha')
         ]);
-        return $response->clientError();
+        $objectToken =  JWTAuth::setToken($response->json()['token']);
+        
+      //  return JWTAuth::decode($objectToken->getToken())->get('exp');
+       //return "auth('api')";
+        return ;
+      //  return $tok;
+
     }
 
     public function mostrar(Request $request)
     {
-        $response = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHZXJhw6fDo28gYWx1cmEiLCJzdWIiOiIzIiwiaWF0IjoxNjE0MDE5NDcwLCJleHAiOjE2MTQxMDU4NzB9.P7l6Iafy3Kv26vOowWBGa8h1B9-zLvjUsms2TWD54QA')->get('localhost:8080/topicos/2');
-        return $response->body();
+      //return JWTAuth::getToken();
+       // $objectToken = JWTAuth::getToken();
+       //  $response = Http::withToken($token)->get('localhost:8080/');
+
+       
+
+         // return Auth::guard('api')->user();
+         return "Brasil";
     }
 
 }
